@@ -1,0 +1,12 @@
+# Windows
+python -m venv venv
+
+# Linux/Mac
+python3 -m venv venv
+
+# Activate the virtual environment
+# Windows
+venv\Scripts\activate
+
+# Linux/Mac
+source venv/bin/activate
