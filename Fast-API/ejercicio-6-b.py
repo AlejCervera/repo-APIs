@@ -326,7 +326,7 @@ def list_books(
         total = cur.fetchone()["total"]
         # TODO: Ask MySQL for one page only: at most `limit` rows, skipping the first `offset`
         # Hint: the same placeholder as before, twice (the values are the last two of the tuple)
-        cur.execute(BOOK_SELECT + where_sql + " ORDER BY b.id LIMIT limit OFFSET offset", (*params, limit, offset))
+        cur.execute(BOOK_SELECT + where_sql + " ORDER BY b.id LIMIT %s OFFSET %s", (*params, limit, offset))
         books = [to_book(row) for row in cur.fetchall()]
 
     def link(new_offset: int) -> str:
