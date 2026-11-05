@@ -232,14 +232,14 @@ def create_book(data: BookCreate, request: Request, response: Response) -> Book:
             raise integrity_error(exc)
         # TODO: The database generated the id (AUTO_INCREMENT). Which cursor attribute tells us which one?
         # Hint: lastrowid
-        book_id = cur._____
+        book_id = cur.lastrowid
         # TODO: Nothing is saved until we confirm it. Which connection method saves the changes?
         # Hint: commit (the other endpoints already call it; look at replace_book)
-        conn._____()
+        conn.commit()
         book = get_book_or_404(cur, book_id)
     # TODO: 201 Created must say WHERE the new book lives, in a response header
     # Hint: the header is called Location; its value is the URL of the new book
-    response.headers["_____"] = str(request.url_for("get_book", book_id=book.id))
+    response.headers["Location"] = str(request.url_for("get_book", book_id=book.id))
     return book
 
 
