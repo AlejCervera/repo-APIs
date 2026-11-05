@@ -178,7 +178,7 @@ def to_book(row: dict) -> Book:
 def get_book_or_404(cur, book_id: int) -> Book:
     # TODO: Never paste values into the SQL text. Which placeholder does PyMySQL replace with book_id?
     # Hint: %s (PyMySQL sends book_id as a value, never as part of the SQL text)
-    cur.execute(BOOK_SELECT + " WHERE b.id = book_id", (book_id,))
+    cur.execute(BOOK_SELECT + " WHERE b.id = %s", (book_id,))
     row = cur.fetchone()
     if row is None:
         raise HTTPException(status_code=404, detail=f"Book {book_id} does not exist.")
